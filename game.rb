@@ -12,6 +12,17 @@ get '/throw/:type' do
 	if !@throws.include?(player_throw)
 		halt 403, "You must throw one of the following #{@throws}"
 	end
-	"You threw #{player_throw}"	
+
+	#now make a random throw for the computer
+	computer_throw = @throws.sample
+	
+	#compare two throws and determine a winner
+	if player_throw == computer_throw
+		"You tied with the computer. Try again!"
+	elsif computer_throw == @defeat[player_throw]
+		"Nicely done! #{player_throw} beats #{computer_throw}."
+	else
+		"Ouch. #{computer_throw} beats #{player_throw}."
+	end
 end
 		
